@@ -328,7 +328,7 @@ def main(args):
         agent.policy.load_part_vpt_weights(torch.load(args.in_weights))
     #env.close()
 
-    policy = DDPPolicy(agent.policy)
+    policy = DDPPolicy(agent.policy, epsilon=args.epsilon)
 
     total_trainable_params = sum(p.numel() for p in policy.parameters() if p.requires_grad)
     total_params = sum(p.numel() for p in policy.parameters())
@@ -620,6 +620,7 @@ if __name__ == '__main__':
     parser.add_argument('--restart_from_checkpoint', type=str, default=None)
 
     parser.add_argument('--reset_checkpoint_dir', type=bool, default=False)
+    parser.add_argument('--epsilon', type=float, default=0)
 
     args = parser.parse_args()
 
