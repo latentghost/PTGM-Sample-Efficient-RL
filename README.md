@@ -96,10 +96,10 @@ python goal_prior/generate_codebook.py \
 
 ## Train high-level policies for downstream tasks with PPO
 
-Train for "harvest log on plains" as an example:
+Train for "cobblestone" as an example:
 ```
 python ppo_highlevel.py \
---config log_plains \
+--config cobblestone \
 --name ppo_highlevel_log \
 --discrete \
 --goal_prior \
@@ -116,7 +116,7 @@ python ppo_highlevel.py \
 
 
 ## Citation
-If you find this code useful, please cite our paper:
+Our implementation is based on the [code](https://github.com/PKU-RL/PTGM) from the authors of that paper, please cite their paper if you use any part of this code.
 ```bibtex
 @inproceedings{
 yuan2024pretraining,
@@ -127,4 +127,3 @@ year={2024},
 url={https://openreview.net/forum?id=o2IEmeLL9r}
 }
 ```
-Our implementation is based on [VPT](https://github.com/openai/Video-Pre-Training) and [Steve-1](https://github.com/Shalev-Lifshitz/STEVE-1). You may also cite these works.
