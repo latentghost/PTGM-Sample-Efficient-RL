@@ -160,7 +160,7 @@ class DDPPolicy(torch.nn.Module):
         # self.epsilon = torch.Tensor([epsilon]).to(device="cuda")
         self.epsilon = epsilon
 
-    def forward(self, obs, agent_state, firsts, actions, action_space_size=(8641, 121)):
+    def forward(self, obs, agent_state, firsts, actions, action_space_size=100):
         """Wraps the policy method to be compatible with DDP with epsilon-greedy exploration"""
         bsz = firsts.shape[0]
         t = firsts.shape[1]
@@ -169,11 +169,14 @@ class DDPPolicy(torch.nn.Module):
 
         # Apply epsilon-greedy logic
         if random.random() < self.epsilon:
+            # print(actions); exit()
             # Select random action
-            selected_actions = {
-                'buttons': torch.randint(0, action_space_size[0], (bsz, t)).to(actions['buttons'].device),
-                'camera': torch.randint(0, action_space_size[1], (bsz, t)).to(actions['camera'].device),
-            }
+            # selected_actions = {
+            #     'buttons': torch.randint(0, action_space_size[0], (bsz, t)).to(actions['buttons'].device),
+            #     'camera': torch.randint(0, action_space_size[1], (bsz, t)).to(actions['camera'].device),
+            # }
+
+            selected_actions = torch.randint(0, action_space_size, (bsz, t)).to(actions.device)
 
             # act
             # print(obs, firsts, len(agent_state), agent_state[0][1][0].shape, agent_state[0][1][1].shape, agent_state[0]); exit() # as: 4x(None, [(4, 128, 2048), (4, 128, 2048)])
@@ -191,7 +194,7 @@ class DDPPolicy(torch.nn.Module):
             # print(actions['buttons'].shape, (new_agent_state[0])); exit() # (4, 64) and 4x((4, 1, 128), [(4, 128, 2048), (4, 128, 2048)], )
 
             pi_distribution = tree_map(lambda x: x.view(bsz, t, -1), pi_distribution)
-            # print(pi_distribution['buttons'].shape); # (4, 64, 8641)
+            # print(pi_distribution.shape); # (4, 64, 100)
             # exit() 
         
         log_prob = self.policy.get_logprob_of_action(pi_distribution, actions)
