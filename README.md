@@ -1,7 +1,7 @@
 
 # RL Project - Group 20
 
-Code tested on Ubuntu 20.04.3 LTS with Python 3.9.12.
+Environment used: Ubuntu 20.04.3 LTS with Python 3.9.12.
 
 Installation steps:
 ```
