@@ -15,6 +15,9 @@ from hierarchical import HighlevelWrapper
 from gym3.types import Discrete, TensorType, Real
 from hierarchical.load_codebook import KMeansCodebook
 import torch
+import wandb
+
+wandb.init(project='ppo-highlevel-eps1', sync_tensorboard=True)
 
 
 if __name__ == "__main__":
