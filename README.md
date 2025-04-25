@@ -1,12 +1,12 @@
 
-# RL Project - Group 20
+# Pre-Training Goal-based Models for Sample Efficient Reinforcement Learning
 
 Environment used: Ubuntu 20.04.3 LTS with Python 3.9.12.
 
 Installation steps:
 ```
-git clone https://github.com/latentghost/RL-Project
-cd RL-Project
+git clone https://github.com/latentghost/PTGM-Sample-Efficient-RL
+cd PTGM-Sample-Efficient-RL
 pip install setuptools==65.5.0 pip==21
 pip install wheel==0.38.0
 pip install -r requirements.txt
@@ -22,7 +22,7 @@ git clone https://github.com/PKU-RL/MCEnv
 cd MCEnv
 python setup.py install
 cd ..
-cd RL-Project
+cd PTGM-Sample-Efficient-RL
 pip install --upgrade --no-cache-dir gdown
 bash download.sh
 ```
